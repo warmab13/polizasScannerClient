@@ -1,0 +1,184 @@
+<ion-view view-title="Agrega tu póliza a la App">
+  <!--<ion-floating-button ng-if="!data" click="scanBarcode()" has-footer="false" button-color="#000000" icon="ion-qr-scanner" icon-color="#fff" text="Escanea" >
+  </ion-floating-button>
+
+  <ion-floating-menu ng-if="data" has-footer="false" menu-color="#000000" menu-icon="ion-navicon-round" menu-open-color="#000000" menu-open-icon="ion-close-round">
+    <ion-floating-item  click="scanBarcode()" has-footer="false" button-color="#000000" icon="ion-qr-scanner" icon-color="#fff" text="Escanea" >
+    </ion-floating-item>
+    <ion-floating-item  click="validatePo(data.a, data.p, data.i)" has-footer="false" button-color="#43a047" icon="ion-android-done" icon-color="#fff" text="Valida" >
+    </ion-floating-item>
+  </ion-floating-menu>-->
+
+
+  <ion-content class="padding">
+
+    <div class="card" ng-if="!data">
+      <div class="item item-divider">
+        Escanea el QR del afectado
+      </div>
+      <div class="item item-text-wrap">
+        Recuerda validar la póliza para conocer su estado.
+      </div>
+    </div>
+    <button class="button button-block button-dark icon-left ion-qr-scanner" ng-if="!data" ng-click="scanBarcode(1)">Escanear Póliza Afectado</button>
+
+    <div class="card" ng-if="!data2">
+      <div class="item item-divider">
+        Escanea el QR del responsable
+      </div>
+      <div class="item item-text-wrap">
+        Recuerda validar la póliza para conocer su estado.
+      </div>
+    </div>
+    <button class="button button-block button-dark icon-left ion-qr-scanner" ng-if="!data2" ng-click="scanBarcode(0)">Escanear Póliza Responsable</button>
+
+    <div class="card" ng-if="data">
+      <div class="item item-divider">
+        Datos de la Póliza
+      </div>
+      <div class="item item-text-wrap">
+        Compañia aseguradora: {{data.a}}
+        <br>
+        Fecha de emisión: {{data.e * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+        <br>
+        No. De Póliza: {{data.p}}
+        <br>
+        Inciso: {{data.i}}
+        <br>
+        Inicio vigencia: {{data.iv * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+        <br>
+        Fin vigencia: {{data.fv * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+        <br>
+        No. serie del vehiculo: {{data.v.s}}
+        <br>
+        Marca vehículo:
+        <span class="" ng-if="data.v.f===1">
+          Ford
+        </span>
+        <span class="" ng-if="data.v.f===2">
+          Chevrolet
+        </span>
+        <span class="" ng-if="data.v.f===3">
+          Jeep
+        </span>
+        <br>
+        Tipo vehículo:
+        <span class="" ng-if="data.v.t===1">
+          Mustang
+        </span>
+        <span class="" ng-if="data.v.t===2">
+          Chevy
+        </span>
+        <span class="" ng-if="data.v.t===3">
+          Jeep
+        </span>
+        <br>
+        Modelo del vehículo: {{data.v.m}}
+        <br>
+        Tipo de servicio: {{data.v.r}}
+      </div>
+    </div>
+      <button class="button button-block button-dark icon-left ion-android-done" ng-if="data" ng-click="validatePo(data.a, data.p, data.i, 1)">Validar Póliza Afectado</button>
+      <div class="card" ng-if="estado" ng-class="{validate: isValid===true, nValidate: isValid===false}">
+        <div class="item item-divider" style="color:white">
+         Estado de la poliza
+        </div>
+        <div class="item item-text-wrap">
+          <b style="color:white">{{estado}}</b>
+        </div>
+      </div>
+      <div class="card" ng-if="validez">
+        <div class="item item-divider">
+          Validez de tu poliza
+        </div>
+        <div class="item item-text-wrap">
+          <b>Inicio de la poliza: </b>
+          <br>
+          {{validez[0] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+          <br>
+
+          <b>Fin de la poliza: </b>
+          <br>
+          {{validez[1] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+        </div>
+      </div>
+      <button class="button button-block button-dark icon-left ion-qr-scanner" ng-if="data" ng-click="scanBarcode()">Escanear Otra Póliza Afectado</button>
+
+
+      <div class="card" ng-if="data2">
+        <div class="item item-divider">
+          Datos de la Póliza
+        </div>
+        <div class="item item-text-wrap">
+          Compañia aseguradora: {{data2.a}}
+          <br>
+          Fecha de emisión: {{data2.e * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+          <br>
+          No. De Póliza: {{data2.p}}
+          <br>
+          Inciso: {{data2.i}}
+          <br>
+          Inicio vigencia: {{data2.iv * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+          <br>
+          Fin vigencia: {{data2.fv * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+          <br>
+          No. serie del vehiculo: {{data2.v.s}}
+          <br>
+          Marca vehículo:
+          <span class="" ng-if="data2.v.f===1">
+            Ford
+          </span>
+          <span class="" ng-if="data2.v.f===2">
+            Chevrolet
+          </span>
+          <span class="" ng-if="data2.v.f===3">
+            Jeep
+          </span>
+          <br>
+          Tipo vehículo:
+          <span class="" ng-if="data2.v.t===1">
+            Mustang
+          </span>
+          <span class="" ng-if="data2.v.t===2">
+            Chevy
+          </span>
+          <span class="" ng-if="data2.v.t===3">
+            Jeep
+          </span>
+          <br>
+          Modelo del vehículo: {{data2.v.m}}
+          <br>
+          Tipo de servicio: {{data2.v.r}}
+        </div>
+      </div>
+        <button class="button button-block button-dark icon-left ion-android-done" ng-if="data2" ng-click="validatePo(data2.a, data2.p, data2.i, 0)">Validar Póliza Responsable</button>
+
+        <div class="card" ng-if="estado2" ng-class="{validate: isValid===true, nValidate: isValid===false}">
+          <div class="item item-divider" style="color:white">
+           Estado de la poliza
+          </div>
+          <div class="item item-text-wrap">
+            <b style="color:white">{{estado2}}</b>
+          </div>
+        </div>
+        <div class="card" ng-if="validez2">
+          <div class="item item-divider">
+            Validez de tu poliza
+          </div>
+          <div class="item item-text-wrap">
+            <b>Inicio de la poliza: </b>
+            <br>
+            {{validez[0] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+            <br>
+
+            <b>Fin de la poliza: </b>
+            <br>
+            {{validez[1] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+          </div>
+        </div>
+        <button class="button button-block button-dark icon-left ion-qr-scanner" ng-if="data2" ng-click="scanBarcode()">Escanear Otra Póliza Responsable</button>
+
+        <button class="button button-block button-dark icon-left ion-qr-scanner" ng-if="data && data2" ng-click="enviar(data2.a, data2.p, data2.i, data.a, data.p, data.i)">Enviar Siniestro</button>
+    </div>
+  </ion-content>
+</ion-view>

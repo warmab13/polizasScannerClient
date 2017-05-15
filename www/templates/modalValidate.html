@@ -1,0 +1,25 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Validez de la Poliza</h1>
+    <div class="buttons">
+      <a class="button icon-right ion-android-close" ng-click="closeModalValidez()"></a>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="card" ng-if="data">
+      <div class="item item-divider">
+        Validez de tu poliza
+      </div>
+      <div class="item item-text-wrap">
+        <b>Inicio de la poliza: </b>
+        <br>
+        {{validez[0] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+        <br>
+
+        <b>Fin de la poliza: </b>
+        <br>
+        {{validez[1] * 1000 | date: 'yyyy-MM-dd HH:mm:ss Z'}}
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
